@@ -5,6 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Урааа, заработало!</h1>
+<h1>Ураааа, заработало!</h1>
 </body>
 </html>
