@@ -30,15 +30,23 @@ class Router
 
             //сравниваем $uriPattern и $uri
             if (preg_match("~$uriPattern~", $uri)) {
+
+                //получаем внутренний путь из внешнего(категорию новостей и номер новости)
+                $internalRoute = preg_replace("~$uriPattern~",$path,$uri);
                 //Если есть совпадение - проверить, какой контроллер и action обрабатывает запрос
-                $segments = explode('/', $path);
+                $segments = explode('/', $internalRoute);
 
                 $controllerName = array_shift($segments) . 'Controller';
                 $controllerName = ucfirst($controllerName);
 
                 $actionName = 'action' . ucfirst(array_shift($segments));
 
+                /*echo '<br>Controller name'.$controllerName;
+                echo '<br>Action'.$actionName;
 
+                echo '<pre>';
+                print_r($parameters);*/
+                $parameters = $segments;
                 //Подключить файл класса-контроллера
                 $controllerFile = ROOT . '/controllers/' .
                     $controllerName . '.php';
@@ -48,7 +56,8 @@ class Router
 
                 //Создать объект, вызвать метод(т.е. action)
                 $controllerObject = new $controllerName;
-                $result = $controllerObject->$actionName();
+                $result = call_user_func_array(array($controllerObject,$actionName),$parameters);
+
                 if ($result != null) {
                     break;
                 }
