@@ -40,12 +40,7 @@ class Router
                 $controllerName = ucfirst($controllerName);
 
                 $actionName = 'action' . ucfirst(array_shift($segments));
-
-                /*echo '<br>Controller name'.$controllerName;
-                echo '<br>Action'.$actionName;
-
-                echo '<pre>';
-                print_r($parameters);*/
+                
                 $parameters = $segments;
                 //Подключить файл класса-контроллера
                 $controllerFile = ROOT . '/controllers/' .
