@@ -2,7 +2,7 @@
 
 return array(
     'host'=>'testmvc.com',
-    'dbname'=>'mvc_site',
+    'dbname'=>'super_mag',
     'user'=>'root',
     'password'=>'root',
 
